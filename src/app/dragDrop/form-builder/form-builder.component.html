@@ -1,0 +1,154 @@
+<div class="container">
+  <div class="header">
+    <div></div>
+    <a [routerLink]="['/form-list']">
+      <button color="primary" mat-raised-button>Forms List</button>
+    </a>
+  </div>
+
+  <div cdkDropListGroup>
+    <div class="sidenav">
+      <mat-list role="list">
+        <div class="example-container">
+          <div
+            cdkDropList
+            [cdkDropListData]="fieldsList"
+            class="example-list"
+            (cdkDropListDropped)="drop($event)"
+          >
+            <mat-list-item
+              role="listitem"
+              class="example-box"
+              *ngFor="let item of fieldsList"
+              cdkDrag
+            >
+              {{ item?.label }}</mat-list-item
+            >
+            <!-- <div class="example-box" *ngFor="let item of fieldsList" cdkDrag>
+            {{ item?.label }}
+          </div> -->
+          </div>
+        </div></mat-list
+      >
+    </div>
+
+    <div class="main">
+      <div class="example-container">
+        <div
+          cdkDropList
+          [cdkDropListData]="formControls"
+          class="example-list"
+          (cdkDropListDropped)="drop($event)"
+        >
+          <div
+            class="example-box"
+            *ngFor="let item of formControls; let i = index"
+            cdkDrag
+          >
+            <div
+              class="w-100"
+              *ngIf="['textfield', 'number', 'password'].includes(item?.type)"
+            >
+              <label [for]="item?.type" class="form-label">{{
+                item?.label
+              }}</label>
+              <input
+                [type]="item?.type"
+                class="form-control w-100"
+                [id]="item?.type"
+                aria-describedby="emailHelp"
+              />
+            </div>
+            <button
+              *ngIf="item?.type == 'button'"
+              type="submit"
+              class="btn btn-primary"
+            >
+              Submit
+            </button>
+
+            <select
+              *ngIf="item?.type == 'select'"
+              class="form-select"
+              aria-label="Default select example"
+            >
+              <option selected>Open this select menu</option>
+              <option
+                *ngFor="let opt of item?.data?.values"
+                [value]="opt?.value"
+              >
+                {{ opt?.label }}
+              </option>
+            </select>
+
+            <div *ngIf="item?.type == 'checkbox'" class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="flexCheckDefault"
+              />
+              <label class="form-check-label" for="flexCheckDefault">
+                {{ item?.label }}
+              </label>
+            </div>
+
+            <div *ngIf="item?.type == 'radio'" class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="flexRadioDefault"
+                id="{{ 'flexRadioDefault' + i }}"
+              />
+              <label class="form-check-label" for="flexRadioDefault1">
+                {{ item?.label }}
+              </label>
+            </div>
+
+            <div *ngIf="item?.type == 'textarea'" class="form-floating">
+              <textarea
+                class="form-control"
+                placeholder="Leave a comment here"
+                id="floatingTextarea2"
+                style="height: 100px"
+              ></textarea>
+              <label for="floatingTextarea2">Comments</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <form class="row g-3">
+        <!-- <div class="col-auto">
+          <label for="staticEmail2" class="visually-hidden">Email</label>
+          <input
+            type="text"
+            readonly
+            class="form-control-plaintext"
+            id="staticEmail2"
+            value="email@example.com"
+          />
+        </div> -->
+        <div class="col-auto">
+          <input
+            [formControl]="formName"
+            type="text"
+            class="form-control"
+            id="inputPassword2"
+            placeholder="Form Name"
+            required
+          />
+        </div>
+        <div class="col-auto">
+          <button
+            [disabled]="formName?.invalid"
+            (click)="onSave()"
+            type="button"
+            class="btn btn-primary mb-3"
+          >
+            Save Form
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

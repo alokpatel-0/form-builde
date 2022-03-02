@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="header">
+    <div></div>
+    <a [routerLink]="['/form-builder/create']">
+      <button color="primary" mat-raised-button>Create New Form</button>
+    </a>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Forn Name</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of dataSource; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ item?.formName }}</td>
+
+        <td>
+          <span
+            ><mat-icon
+              class="mx-2"
+              aria-hidden="false"
+              aria-label="Example home icon"
+              (click)="onEdit(item)"
+              >edit</mat-icon
+            >
+          </span>
+          <span
+            ><mat-icon
+              class="mx-2"
+              aria-hidden="false"
+              aria-label="Example home icon"
+              >visibility</mat-icon
+            >
+          </span>
+          <span
+            ><mat-icon
+              class="mx-2"
+              aria-hidden="false"
+              aria-label="Example home icon"
+              >delete</mat-icon
+            >
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
