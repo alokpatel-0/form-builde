@@ -45,7 +45,6 @@ export class FormBuilderComponent implements OnInit {
       controls: this.formControls,
     };
     if (localData) {
-      // localData = JSON.parse(localData);
       localData?.push(payload);
     } else {
       localData = [payload];
